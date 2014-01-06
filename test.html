@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>custom scroller</title>
+	<style>
+		.mtopwrap{height: 300px; width: 100px; margin: 100px 0 0 100px;}
+		.csbar{height: 30px; width:20px; border-radius: 3px; text-indent: -999em;}
+		.csbarslot{border-radius: 3px; }
+
+		
+		.updateinfo{float: left; margin: 0 50px 0 10px; width: 300px; height: 150px;}
+		.updateinfo h3{
+			margin: 0;
+			padding: 0 0 14px 0;
+			border-bottom: 1px solid #ccc;
+			color: #4d4a46;
+			font-size: 1em;
+		}
+		.updateinfo ul{border-top: 1px solid #fdfcfa; padding: 16px 0 0 0;}
+		.updateinfo ul li {
+			margin: 0 0 16px 0;
+			padding: 0 0 0 26px;
+			background: url(http://www.ex-walker.cn/image/icon_check.png) no-repeat 0 4px;
+			font-size: 1em;
+			line-height: 1em;
+			color: #626262;
+		}
+		.updateinfo date{font-size:0.7em; color: #98a5b5; float: right; }
+
+
+	</style>
+</head>
+<body>
+
+<!-- <div class="mtopwrap" id="sctar">
+	<ul id="tar">
+		<li><a class="mnava" href="" target="_blank">store1</a></li>
+		<li><a class="mnava" href="" target="_blank">store2</a></li>
+		<li><a class="mnava" href="" target="_blank">store3</a></li>
+		<li><a class="mnava" href="" target="_blank">store4</a></li>
+		<li><a class="mnava" href="" target="_blank">store5</a></li>
+		<li><a class="mnava" href="" target="_blank">store6</a></li>
+		<li><a class="mnava" href="" target="_blank">store7</a></li>
+		<li><a class="mnava" href="" target="_blank">store8</a></li>
+		<li><a class="mnava" href="" target="_blank">store9</a></li>
+		<li><a class="mnava" href="" target="_blank">store10</a></li>
+		<li><a class="mnava" href="" target="_blank">store11</a></li>
+		<li><a class="mnava" href="" target="_blank">store12</a></li>
+		<li><a class="mnava" href="" target="_blank">store13</a></li>
+		<li><a class="mnava" href="" target="_blank">store14</a></li>
+		<li><a class="mnava" href="" target="_blank">store15</a></li>
+	</ul>
+</div> -->
+
+<div class="updateinfo" id="test">
+	<ul>
+		<li>兼容宽屏PC <date>2013-12-01</date></li>
+		<li>兼容窄屏PC <date>2013-12-01</date></li>
+		<li>兼容IPAD平板终端 <date>2013-12-01</date></li>
+		<li>兼容Mobile移动终端 <date>2013-12-01</date></li>
+		<li>Twitch游戏平台接入 <date>2013-12-01</date></li>
+		<li>新浪微博接入 <date>2013-12-01</date></li>
+		<li>腾讯微博接入 <date>2013-12-01</date></li>
+		<li>通讯录0.0.1版本发布 <date>2013-12-01</date></li>
+    </ul>
+</div>
+
+<script src="http://grocery.ex-walker.cn/jquery/jquery.1.10.2.min.js"></script> 
+<script src="cscroller.js"></script>
+<script>
+	$(".updateinfo").cscroller({
+		barbg:'#666',
+	});
+</script>
+</body>
+</html>

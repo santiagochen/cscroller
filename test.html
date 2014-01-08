@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<title>custom scroller</title>
 	<style>
-		.mtopwrap{height: 300px; width: 100px; margin: 100px 0 0 100px;}
-		.csbar{height: 30px; width:20px; border-radius: 3px; text-indent: -999em;}
-		.csbarslot{border-radius: 3px; }
-
 		
-		.updateinfo{float: left; margin: 0 50px 0 10px; width: 300px; height: 150px;}
+		.csbar{height: 20px; width:100%; border-radius: 3px; text-indent: -999em;}
+		.csbarslot{width:100%; }
+		
+		/*decorate list*/
+		.updateinfo{float: left; margin: 0 50px 0 50px; width: 400px; height: 150px;}
 		.updateinfo h3{
 			margin: 0;
 			padding: 0 0 14px 0;
@@ -27,31 +27,21 @@
 			color: #626262;
 		}
 		.updateinfo date{font-size:0.7em; color: #98a5b5; float: right; }
+		/*end decorate list*/
 
+		@media screen and (max-width: 768px) {
+			.updateinfo{width:300px;}
+			.csbarwrap{width:30px !important; }
+		}
+		
+		@media screen and (max-width: 480px) {
+			.updateinfo{width: 300px;}
+			.csbarwrap{width:40px !important; }
+		}
 
 	</style>
 </head>
 <body>
-
-<!-- <div class="mtopwrap" id="sctar">
-	<ul id="tar">
-		<li><a class="mnava" href="" target="_blank">store1</a></li>
-		<li><a class="mnava" href="" target="_blank">store2</a></li>
-		<li><a class="mnava" href="" target="_blank">store3</a></li>
-		<li><a class="mnava" href="" target="_blank">store4</a></li>
-		<li><a class="mnava" href="" target="_blank">store5</a></li>
-		<li><a class="mnava" href="" target="_blank">store6</a></li>
-		<li><a class="mnava" href="" target="_blank">store7</a></li>
-		<li><a class="mnava" href="" target="_blank">store8</a></li>
-		<li><a class="mnava" href="" target="_blank">store9</a></li>
-		<li><a class="mnava" href="" target="_blank">store10</a></li>
-		<li><a class="mnava" href="" target="_blank">store11</a></li>
-		<li><a class="mnava" href="" target="_blank">store12</a></li>
-		<li><a class="mnava" href="" target="_blank">store13</a></li>
-		<li><a class="mnava" href="" target="_blank">store14</a></li>
-		<li><a class="mnava" href="" target="_blank">store15</a></li>
-	</ul>
-</div> -->
 
 <div class="updateinfo" id="test">
 	<ul>
@@ -67,10 +57,11 @@
 </div>
 
 <script src="http://grocery.ex-walker.cn/jquery/jquery.1.10.2.min.js"></script> 
-<script src="cscroller.js"></script>
+
+<script src="js/cscroller.js"></script>
 <script>
 	$(".updateinfo").cscroller({
-		barbg:'#666',
+		barbg:'#333',
 	});
 </script>
 </body>

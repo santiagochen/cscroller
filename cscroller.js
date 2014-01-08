@@ -1,6 +1,6 @@
 /*
  * cscroller.js 
- * version 0.0.1
+ * version 0.0.2
  * creator: Santiago Chen
  * Email: santiago1209@foxmail.com
  * cscroller.js is a custom scroller with js;
@@ -116,28 +116,34 @@ $.fn.cscroller=function(options){
     	'position':'relative'
     });
 
+    //create scbarwrap
+    var  thisbarwrap = $('<div class="csbarwrap"></div>').css({
+        'position':'absolute',
+        'width': 20,
+        'top':0,
+        'right':0,
+        'zIndex': 997
+    }).appendTo($(this));
+    if(opts.barside=="left"){thisbar.css('left',0)};
+
     //create scbar
     var thisbar = $('<a class="csbar">bar</a>').css({
     	'cursor':'default',
     	'position':'absolute',
     	'background': opts.barbg,
     	'top':0,
-    	'right':0,
+        'width': '100%',
         'zIndex': 999
-
-    }).appendTo($(this));
-    if(opts.barside=="left"){thisbar.css('left',0)};
+    }).appendTo(thisbarwrap);
 
     //create scbarslot
     var thisbarslot = $('<div class="csbarslot"></div>').css({
         'position':'absolute',
         'background': opts.barslotbg,
         'height': $(this).height(),
-        'width': thisbar.width(),
-        'right':0,
+        'width': '100%',
         'zIndex': 998
-    }).appendTo($(this));
-    if(opts.barside=="left"){thisbarslot.css('left',0)};
+    }).appendTo(thisbarwrap);
 
     var mousestarty, mouseoffsety, mousecurrenty;
     var barstarty, barmaxdragheight;

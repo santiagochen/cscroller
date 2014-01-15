@@ -1,6 +1,6 @@
 /*
  * cscroller.js 
- * version 0.0.2
+ * version 0.0.3
  * creator: Santiago Chen
  * Email: santiago1209@foxmail.com
  * cscroller.js is a custom scroller with js;
@@ -13,6 +13,7 @@
  * barslotbg:'#ccc',
  * barbg:'#000',
  * barside:'right' | 'left' , default is right;
+ * barautohide:false | true,  default  is false;
 */
 
 (function($){
@@ -100,7 +101,8 @@ $.fn.cscroller=function(options){
     var defaults = {
         barslotbg:'#ccc',
     	barbg:'#000',
-    	barside:'right'
+    	barside:'right',
+        barautohide:false
     }
 
     var opts = $.extend({},defaults,options)
@@ -117,14 +119,24 @@ $.fn.cscroller=function(options){
     });
 
     //create scbarwrap
-    var  thisbarwrap = $('<div class="csbarwrap"></div>').css({
+    var thisbarwrap = $('<div class="csbarwrap"></div>').css({
         'position':'absolute',
         'width': 20,
         'top':0,
         'right':0,
+        'margin':0,
+        'padding':0,
         'zIndex': 997
-    }).appendTo($(this));
+    });
+    if(thisul.height()>$(this).height()){
+
+        thisbarwrap.appendTo($(this));
+        if(opts.barautohide==true){
+            thisbarwrap.css('visibility','hidden');
+        }
+    }
     if(opts.barside=="left"){thisbar.css('left',0)};
+
 
     //create scbar
     var thisbar = $('<a class="csbar">bar</a>').css({
@@ -132,6 +144,8 @@ $.fn.cscroller=function(options){
     	'position':'absolute',
     	'background': opts.barbg,
     	'top':0,
+        'margin':0,
+        'padding':0,
         'width': '100%',
         'zIndex': 999
     }).appendTo(thisbarwrap);
@@ -142,6 +156,8 @@ $.fn.cscroller=function(options){
         'background': opts.barslotbg,
         'height': $(this).height(),
         'width': '100%',
+        'margin':0,
+        'padding':0,
         'zIndex': 998
     }).appendTo(thisbarwrap);
 
@@ -158,6 +174,7 @@ $.fn.cscroller=function(options){
     $(this).bind('mouseleave',mouseouthandler);
 
     function mouseenterhandler(e){
+        if(opts.barautohide==true){thisbarwrap.css('visibility','visible');}
 		that.mousewheel(function(e,delta){
 			barstarty = thisbar.position().top;
 			wheelcontrol(delta);
@@ -166,6 +183,7 @@ $.fn.cscroller=function(options){
     }
 
 	function mouseouthandler(e){
+        if(opts.barautohide==true){thisbarwrap.css('visibility','hidden');}
 		window.onmousewheel=document.onmousewheel=null;	
 	}
 

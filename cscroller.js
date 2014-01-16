@@ -1,6 +1,6 @@
 /*
  * cscroller.js 
- * version 0.0.3
+ * version 0.0.4
  * creator: Santiago Chen
  * Email: santiago1209@foxmail.com
  * cscroller.js is a custom scroller with js;
@@ -127,12 +127,11 @@ $.fn.cscroller=function(options){
         'margin':0,
         'padding':0,
         'zIndex': 997
-    });
+    }).appendTo($(this)).hide();
     if(thisul.height()>$(this).height()){
-
-        thisbarwrap.appendTo($(this));
+        thisbarwrap.show();
         if(opts.barautohide==true){
-            thisbarwrap.css('visibility','hidden');
+            thisbarwrap.hide()
         }
     }
     if(opts.barside=="left"){thisbar.css('left',0)};
@@ -144,6 +143,7 @@ $.fn.cscroller=function(options){
     	'position':'absolute',
     	'background': opts.barbg,
     	'top':0,
+        'height': 20,
         'margin':0,
         'padding':0,
         'width': '100%',
@@ -162,11 +162,37 @@ $.fn.cscroller=function(options){
     }).appendTo(thisbarwrap);
 
     var mousestarty, mouseoffsety, mousecurrenty;
-    var barstarty, barmaxdragheight;
+    var barstarty, barmaxdragheight, barslotlastheight, barlastheight, barlasttop, scaleratio;
     var thisulstarty,thisuloffsety;
     var that = $(this);
 
+    barslotlastheight = thisbarslot.height();
+    barlastheight = thisbar.height();
+    //barlasttop = thisbar.position().top;
+
     barmaxdragheight = $(this).height()-thisbar.height();
+
+    //resize events listen
+    $(window).resize(function(){
+        if(thisul.height()>that.height()){
+            thisbarwrap.show();
+            if(opts.barautohide==true){
+                thisbarwrap.hide();
+            }
+        }
+        else{
+            thisbarwrap.hide();
+        }
+        
+        thisbarslot.css("height",that.height());
+        scaleratio = thisbarslot.height()/barslotlastheight;
+        thisbar.css('height',barlastheight*scaleratio);
+        barstarty = thisbar.position().top;
+        barmaxdragheight = that.height()-thisbar.height();
+        thisbar.css("top", barlasttop*scaleratio);
+        
+
+    })
 
     //events listening;
     //mousewheel controll;
@@ -174,7 +200,13 @@ $.fn.cscroller=function(options){
     $(this).bind('mouseleave',mouseouthandler);
 
     function mouseenterhandler(e){
-        if(opts.barautohide==true){thisbarwrap.css('visibility','visible');}
+        barslotlastheight = thisbarslot.height();
+        barlastheight = thisbar.height();
+        
+        if(thisul.height()>that.height()&&opts.barautohide==true){
+            thisbarwrap.show();
+        }
+        console.log("ouseenterhandler thisbar top: "+thisbar.position().top);
 		that.mousewheel(function(e,delta){
 			barstarty = thisbar.position().top;
 			wheelcontrol(delta);
@@ -183,7 +215,7 @@ $.fn.cscroller=function(options){
     }
 
 	function mouseouthandler(e){
-        if(opts.barautohide==true){thisbarwrap.css('visibility','hidden');}
+        if(opts.barautohide==true){thisbarwrap.hide();}
 		window.onmousewheel=document.onmousewheel=null;	
 	}
 
@@ -206,15 +238,18 @@ $.fn.cscroller=function(options){
     	$(document).bind('mousemove',barmousemovehandler);
     }
     function barmouseuphandler(e){
+        barlasttop = thisbar.position().top;
     	$(document).unbind('mousemove',barmousemovehandler);
     }
     function barmousemovehandler(e){
     	e.preventDefault();
+
     	mousecurrenty = e.pageY;
     	mouseoffsety = Math.max(0,Math.min(barmaxdragheight,(mousecurrenty-mousestarty+barstarty)));
     	thisbar.css("top",mouseoffsety);
     	thisuloffsety = (mouseoffsety*(thisul.height()-that.height()))/barmaxdragheight;
     	thisul.css("top",-thisuloffsety);
+
     }
 
 

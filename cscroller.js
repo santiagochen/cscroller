@@ -1,6 +1,6 @@
 /*
  * cscroller.js 
- * version 0.0.4
+ * version 0.0.5
  * creator: Santiago Chen
  * Email: santiago1209@foxmail.com
  * cscroller.js is a custom scroller with js;
@@ -176,12 +176,18 @@ $.fn.cscroller=function(options){
     $(window).resize(function(){
         if(thisul.height()>that.height()){
             thisbarwrap.show();
+            that.mousewheel(function(e,delta){
+                barstarty = thisbar.position().top;
+                wheelcontrol(delta);
+            })
             if(opts.barautohide==true){
                 thisbarwrap.hide();
             }
         }
         else{
             thisbarwrap.hide();
+            that.unmousewheel();
+            
         }
         
         thisbarslot.css("height",that.height());
@@ -206,11 +212,14 @@ $.fn.cscroller=function(options){
         if(thisul.height()>that.height()&&opts.barautohide==true){
             thisbarwrap.show();
         }
-        console.log("ouseenterhandler thisbar top: "+thisbar.position().top);
-		that.mousewheel(function(e,delta){
-			barstarty = thisbar.position().top;
-			wheelcontrol(delta);
-		})
+        
+        if(thisul.height()>that.height()){
+            that.mousewheel(function(e,delta){
+                barstarty = thisbar.position().top;
+                wheelcontrol(delta);
+            }) 
+        }
+		
 		
     }
 

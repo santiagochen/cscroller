@@ -1,11 +1,11 @@
 /*
- * cscroller.js 
+ * myscroller.js 
  * version 0.0.5
  * creator: Santiago Chen
  * Email: santiago1209@foxmail.com
- * cscroller.js is a custom scroller with js;
+ * myscroller.js is a custom scroller with js;
  * because the default scroller is not good-looking;
- * the cscroller.js is created for better user experience;
+ * the myscroller.js is created for better user experience;
  */
 
 /* 
@@ -94,9 +94,9 @@ function handler(event) {
 }
 
 /*
- * cscroller.js
+ * myscroller.js
 */
-$.fn.cscroller=function(options){
+$.fn.myscroller=function(options){
     
     var defaults = {
         barslotbg:'#ccc',

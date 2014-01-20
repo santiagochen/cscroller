@@ -1,9 +1,9 @@
-cscroller
+myscroller
 =========
 
-cscroller.js is a custom scroller with js, 
+myscroller.js is a custom scroller with js, 
 because the default scroller is not good-looking, 
-the cscroller.js is created for better user experience;
+the myscroller.js is created for better user experience;
 
 
 ATTRIBUTES:
